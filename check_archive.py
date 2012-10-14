@@ -13,37 +13,47 @@ class bc:
     FAIL = '\033[91m'
     END = '\033[0m'
 
+def print_ok(string):
+    print bc.OK + string + bc.END
+
+def print_fail(string):
+    print bc.FAIL + string + bc.END
+
+def print_warning(string):
+    print bc.WARNING + string + bc.WARNING
+
 f_login = open('logins.txt', 'r').read().splitlines()
 
 def compute_authors(path, login):
     f = open(path + 'AUTHORS').read()
     if f == '* ' + login + '\r\n' or f == '* ' + login + '\n':
-        print bc.OK + '> AUTHORS: OK' + bc.END
+        print_ok('> AUTHORS: OK')
     elif f == '* ' + login:
-        print bc.FAIL + '> AUTHORS: Missing second line' + bc.END
+        print_fail('> AUTHORS: Missing second line')
     else:
-        print bc.FAIL + '> AUTHORS: Syntax error' + bc.END
+        print_fail('> AUTHORS: Syntax error')
 
 def compute_test(path, login):
     if os.path.isfile(path + 'AUTHORS'):
         compute_authors(path, login)
     else:
-        print bc.FAIL + '> missing AUTHORS' + bc.END
+        print_fail('> missing AUTHORS')
 
 def unzip_archive(archive, login):
     path = 'unzip/' + login + '/'
     zipfile.ZipFile(archive + '.zip').extractall(path)
     path += login + '/'
     if os.path.exists(path):
+        print_ok('> Directory: OK')
         compute_test(path, login)
     else:
-        print bc.FAIL + '> missing ' + login + '/ folder in archive'
+        print_fail('> missing ' + login + '/ folder in archive')
 
 def test_archive(login):
     archive = tppath + 'rendu-' + tpname + '-' + login
     print login + ':'
     if not os.path.isfile(archive+'.zip'):
-        print bc.FAIL + '> missing rendu' + bc.END
+        print_fail('> missing rendu')
     else:
         unzip_archive(archive, login)
     print ''
