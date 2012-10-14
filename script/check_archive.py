@@ -6,8 +6,8 @@ import zipfile
 
 # Import custom modules
 from check_archive import var
-from check_archive import bc
-from check_archive.print_color import *
+from prints import bc
+from prints.print_color import *
 
 # Config variables
 tppath = 'rendu/'
