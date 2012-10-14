@@ -1,10 +1,15 @@
 #! /usr/bin/python -B
+
+# Import libs
 import os.path
 import zipfile
-import var
-import bc
-from print_color import *
 
+# Import custom modules
+from check_archive import var
+from check_archive import bc
+from check_archive.print_color import *
+
+# Config variables
 tppath = 'rendu/'
 tpname = 'tp'
 
