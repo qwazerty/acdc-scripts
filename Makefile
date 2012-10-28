@@ -1,11 +1,14 @@
 check_presence:
-		./script/check_presence.py
+	./script/check_presence.py
 
 check_archive: clean
-		./script/check_archive.py
+	./script/check_archive.py
+
+random:
+	./script/random.sh
 
 clean:
-		rm -rf unzip/
+	rm -rf unzip/
 
 cleanall: clean
-		rm -rf rendu/*
+	rm -rf rendu/*
